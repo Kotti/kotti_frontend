@@ -10,6 +10,7 @@ def my_view(request):
     return {'one': one, 'project': 'kotti_frontend'}
 
 
-@view_config(context=Document, renderer='templates/mytemplate.pt', permission='pview')
+@view_config(context=Document, renderer='templates/mytemplate.pt',
+             permission='pview')
 def document_view(request):
     return {'one': request.context, 'project': 'kotti_frontend'}
