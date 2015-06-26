@@ -53,4 +53,9 @@ With ``kotti_frontend`` you can:
 Since the frontend and the backend are served on the same domain, there is shared
 authentication so you can implement toolbar or live edit features (roadmap).
 
+You can run this setup using two different process implementing a shared cookie
+authentication by your own playing with domains.
+Instead ``kotti_frontend`` use by default a different setup based on a composite
+application powered by ``Paste#urlmap``.
+
 This is a still **in progress** and **experimental** plugin so things will change.
