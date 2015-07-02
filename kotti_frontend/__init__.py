@@ -6,6 +6,13 @@ from kotti import _resolve_dotted
 conf_defaults = copy.deepcopy(kotti_conf_defaults)
 conf_defaults['kotti.base_includes'] = 'kotti'
 
+frontend_includes = [
+    'kotti_frontend.views.image',
+    'kotti_frontend.views.file',
+    'kotti_frontend.views.home',
+    'kotti_frontend.views.document',
+    ]
+
 
 def main(global_config, **settings):
     # This function is a 'paste.app_factory' and returns a WSGI
@@ -16,7 +23,9 @@ def main(global_config, **settings):
     ###
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
-    config.scan()
+
+    for include in frontend_includes:
+        config.include(include)
     ###
     return config.make_wsgi_app()
 

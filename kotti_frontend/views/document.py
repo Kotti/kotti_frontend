@@ -7,3 +7,7 @@ from kotti.resources import Document
              permission='pview')
 def document_view(request):
     return {'one': request.context, 'project': 'kotti_frontend'}
+
+
+def includeme(config):
+    config.scan(__name__)

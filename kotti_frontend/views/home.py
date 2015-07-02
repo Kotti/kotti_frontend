@@ -9,3 +9,7 @@ from kotti.resources import Document
 def home_view(request):
     one = DBSession.query(Document).first()
     return {'one': one, 'project': 'kotti_frontend'}
+
+
+def includeme(config):
+    config.scan(__name__)
