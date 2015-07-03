@@ -1,7 +1,13 @@
 import copy
+from sqlalchemy import engine_from_config
+from sqlalchemy.exc import UnboundExecutionError
 from pyramid.config import Configurator
-from kotti import conf_defaults as kotti_conf_defaults
-from kotti import _resolve_dotted
+from kotti import (
+    conf_defaults as kotti_conf_defaults,
+    DBSession,
+    _resolve_dotted,
+    )
+from kotti.resources import initialize_sql
 
 conf_defaults = copy.deepcopy(kotti_conf_defaults)
 conf_defaults['kotti.base_includes'] = 'kotti'
@@ -21,8 +27,14 @@ def main(global_config, **settings):
     # application.
 
     config = base_configure(global_config, **settings)
+    try:
+        DBSession.get_bind()
+    except UnboundExecutionError:
+        # are you are running frontend-dev.ini standalone?
+        engine = engine_from_config(config.registry.settings, 'sqlalchemy.')
+        initialize_sql(engine)
 
-    ###
+    # ## TODO: move this block outside main
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
 
