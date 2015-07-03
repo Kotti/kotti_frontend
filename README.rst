@@ -50,12 +50,17 @@ With ``kotti_frontend`` you can:
   a completely different design that does not fit the usual page layout?
   So start from scratch with a blank theme if you need the maximum control
 
-Since the frontend and the backend are served on the same domain, there is shared
-authentication so you can implement toolbar or live edit features (roadmap).
+The frontend and the backend are served on the same domain by default thanks to
+a composite application powered by ``Paste#urlmap``.
 
-You can run this setup using two different process implementing a shared cookie
-authentication by your own playing with domains.
-Instead ``kotti_frontend`` use by default a different setup based on a composite
-application powered by ``Paste#urlmap``.
+Alternatively you can run this setup using two different process listening on different ports
+instead of the default ``/`` vs ``/cms`` url maps.
+
+Roadmap:
+
+* frontend toolbar
+
+* live edit features
+
 
 This is a still **in progress** and **experimental** plugin so things will change.
