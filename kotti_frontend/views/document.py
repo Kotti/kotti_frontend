@@ -4,6 +4,7 @@ from kotti.resources import Document
 
 @view_config(context=Document,
              renderer='kotti_frontend:templates/mytemplate.pt',
+             name='view',
              permission='pview')
 def document_view(request):
     return {'one': request.context, 'project': 'kotti_frontend'}

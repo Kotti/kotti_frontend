@@ -13,6 +13,7 @@ conf_defaults = copy.deepcopy(kotti_conf_defaults)
 conf_defaults['kotti.base_includes'] = 'kotti'
 
 frontend_includes = [
+    'kotti_frontend.views.default',
     'kotti_frontend.views.image',
     'kotti_frontend.views.file',
     'kotti_frontend.views.home',
