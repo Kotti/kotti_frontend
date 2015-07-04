@@ -1,0 +1,6 @@
+-r kotti-requirements.txt
+
+Paste==2.0.2
+kotti_backend==0.1.4
+
+-e .
