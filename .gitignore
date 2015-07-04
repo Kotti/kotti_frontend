@@ -34,3 +34,5 @@ bin/
 include/
 pip-selfcheck.json
 Kotti.db
+python/
+python-dev/
