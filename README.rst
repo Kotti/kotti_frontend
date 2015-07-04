@@ -62,5 +62,16 @@ Roadmap:
 
 * live edit features
 
+How to install kotti_frontend
+-----------------------------
 
-This is a still **in progress** and **experimental** plugin so things will change.
+It is simple::
+
+    $ make install-prerequisites     # performs some apt-get install, you need sudo
+    $ make install
+    $ make run
+
+Visit:
+
+* http://localhost:5000/ (public website)
+* http://localhost:5000/cms (backend with admin / qwerty authentication)
