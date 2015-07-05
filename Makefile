@@ -75,7 +75,7 @@ clean-all:
 update-requirements:
 	@echo ">>> Update requirements.txt"
 	$(VIRTUALENV_NAME)/bin/pip install -r production-requirements.txt
-	$(VIRTUALENV_NAME)/bin/pip freeze -r production-requirements.txt | sed '1,2d' > requirements.txt
+	$(VIRTUALENV_NAME)/bin/pip freeze -r production-requirements.txt | grep -v kotti_frontend | sed '1,2d' > requirements.txt
 
 update-kotti:
 	@echo ">>> Updating to version ${VERSION}"
