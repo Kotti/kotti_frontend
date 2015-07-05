@@ -1,5 +1,5 @@
 import pytest
-from kotti.views.file import (
+from kotti_frontend.views.file import (
     attachment_view,
     inline_view,
     )
