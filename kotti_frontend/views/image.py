@@ -13,6 +13,7 @@ def image_view(request, subpath=None):
 
 
 @view_config(context=IImage,
+             name='view',
              permission='pview')
 def image_default_view(request):
     view_instance = ImageView(request.context, request)

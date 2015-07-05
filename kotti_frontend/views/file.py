@@ -4,5 +4,6 @@ from kotti.views.file import attachment_view
 
 def includeme(config):
     config.add_view(attachment_view,
+                    name='view',
                     context=File,
                     permission='pview')
