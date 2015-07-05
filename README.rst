@@ -68,8 +68,8 @@ How to install kotti_frontend
 It is simple::
 
     $ make install-prerequisites     # performs some apt-get install, you need sudo
-    $ make install
-    $ make run
+    $ make install-dev
+    $ make run-dev
 
 Visit:
 
