@@ -20,5 +20,5 @@ def image_default_view(request):
     return view_instance.image()
 
 
-def includeme(config):
+def includeme(config):    # pragma: no cover
     config.scan(__name__)
