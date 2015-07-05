@@ -1,3 +1,5 @@
+Kotti==1.1.4
+
 Paste==2.0.2
 kotti-backend==0.1.4
 
@@ -35,8 +37,7 @@ js.jqueryui-tagit==2.0.24.post2
 js.modernizr==2.5.3.1
 js.select2==3.4.1
 js.tinymce==4.1.5
-Kotti==1.1.4
--e git+git@github.com:Kotti/kotti_frontend.git@ed254c3fa265c4823d9fbd20788817466efcb0f3#egg=kotti_frontend-master
+-e git+git@github.com:Kotti/kotti_frontend.git@56e4d9e7fc9e9c94c33a5ce0e5c3d84503990561#egg=kotti_frontend-master
 kotti-tinymce==0.5.3
 lingua==3.10
 Mako==1.0.1
