@@ -50,7 +50,7 @@
         </div>
         <div class="row">
           <div class="copyright">
-            <strong>${one.title}</strong>
+            <strong>${context.title}</strong>
             Copyright &copy; Pylons Project
           </div>
         </div>
