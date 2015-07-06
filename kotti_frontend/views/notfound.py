@@ -9,5 +9,5 @@ def notfound_view(request):
     return {'one': request.context, 'project': 'kotti_frontend'}
 
 
-def includeme(config):
+def includeme(config):  # pragma: no cover
     config.scan(__name__)
