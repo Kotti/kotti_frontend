@@ -4,9 +4,11 @@ from kotti import DBSession
 from kotti.resources import Document
 
 
-@view_config(route_name='home',
+@view_config(context=Document,
+             root_only=True,
              renderer='kotti_frontend:templates/mytemplate.pt')
 def home_view(request):
+    # you can register a different home page view
     one = DBSession.query(Document).first()
     return {'one': one, 'project': 'kotti_frontend'}
 

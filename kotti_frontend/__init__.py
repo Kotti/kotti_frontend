@@ -13,6 +13,7 @@ conf_defaults = copy.deepcopy(kotti_conf_defaults)
 conf_defaults['kotti.base_includes'] = 'kotti'
 
 frontend_includes = [
+    'kotti.views',   # custom kotti predicates
     'kotti_frontend.views.default',
     'kotti_frontend.views.image',
     'kotti_frontend.views.file',
@@ -36,7 +37,6 @@ def main(global_config, **settings):
 
     # ## TODO: move this block outside main
     config.add_static_view('static', 'static', cache_max_age=3600)
-    config.add_route('home', '/')
 
     for include in frontend_includes:
         config.include(include)
