@@ -1,11 +1,11 @@
-from pyramid.httpexceptions import HTTPNotFound
-from pyramid.view import view_config
+from pyramid.view import notfound_view_config
 
 
-@view_config(context=HTTPNotFound,
-             renderer='kotti_frontend:templates/notfound.pt',
-             )
+@notfound_view_config(
+    renderer='kotti_frontend:templates/notfound.pt',
+    )
 def notfound_view(request):
+    request.response.status = '404 Not Found'
     return {'one': request.context, 'project': 'kotti_frontend'}
 
 
