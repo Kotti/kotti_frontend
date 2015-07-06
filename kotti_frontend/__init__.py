@@ -21,6 +21,7 @@ frontend_includes = [
     'kotti_frontend.views.home',
     'kotti_frontend.views.document',
     'kotti_frontend.views.notfound',
+    'kotti_frontend.views.forbidden',
     ]
 
 
