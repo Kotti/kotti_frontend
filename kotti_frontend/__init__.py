@@ -14,6 +14,7 @@ conf_defaults['kotti.base_includes'] = 'kotti'
 
 frontend_includes = [
     'kotti.views',   # custom kotti predicates
+    'kotti_frontend.static',
     'kotti_frontend.views.default',
     'kotti_frontend.views.image',
     'kotti_frontend.views.file',
@@ -35,8 +36,7 @@ def main(global_config, **settings):
         engine = engine_from_config(config.registry.settings, 'sqlalchemy.')
         initialize_sql(engine)
 
-    # ## TODO: move this block outside main
-    config.add_static_view('static', 'static', cache_max_age=3600)
+    # ## TODO: refactor this (this should be overrideable)
 
     for include in frontend_includes:
         config.include(include)
