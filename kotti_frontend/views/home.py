@@ -9,7 +9,7 @@ from kotti.resources import Document
              renderer='kotti_frontend:templates/mytemplate.pt')
 def home_view(request):
     # you can register a different home page view
-    return {'project': 'kotti_frontend'}
+    return {}
 
 
 def includeme(config):

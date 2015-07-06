@@ -6,7 +6,7 @@ from pyramid.view import notfound_view_config
     )
 def notfound_view(request):
     request.response.status = '404 Not Found'
-    return {'one': request.context, 'project': 'kotti_frontend'}
+    return {}
 
 
 def includeme(config):  # pragma: no cover

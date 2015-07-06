@@ -7,7 +7,7 @@ from kotti.resources import Document
              name='view',
              permission='pview')
 def document_view(request):
-    return {'project': 'kotti_frontend'}
+    return {}
 
 
 def includeme(config):   # pragma: no cover
