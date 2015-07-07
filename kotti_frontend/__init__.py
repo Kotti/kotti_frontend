@@ -9,10 +9,8 @@ from kotti import (
     )
 from kotti.resources import initialize_sql
 
-conf_defaults = copy.deepcopy(kotti_conf_defaults)
-conf_defaults['kotti.base_includes'] = 'kotti'
-
 frontend_includes = [
+    'kotti',
     'kotti.views',   # custom kotti predicates
     'kotti_frontend.static',
     'kotti_frontend.views.default',
@@ -23,6 +21,9 @@ frontend_includes = [
     'kotti_frontend.views.notfound',
     'kotti_frontend.views.forbidden',
     ]
+
+conf_defaults = copy.deepcopy(kotti_conf_defaults)
+conf_defaults['kotti.base_includes'] = ' '.join(frontend_includes)
 
 
 def main(global_config, **settings):
@@ -37,11 +38,6 @@ def main(global_config, **settings):
         engine = engine_from_config(config.registry.settings, 'sqlalchemy.')
         initialize_sql(engine)
 
-    # ## TODO: refactor this (this should be overrideable)
-
-    for include in frontend_includes:
-        config.include(include)
-    ###
     return config.make_wsgi_app()
 
 
