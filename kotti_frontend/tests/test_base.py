@@ -64,3 +64,17 @@ class TestApp:
             ]
         view = app.registry.adapters.lookup(provides, IView, name='login')
         assert view.__module__ == 'kotti.testing'
+
+    def test_pyramid_includes_zcml(self, root):
+        from mock import patch
+        from mock import MagicMock
+        from kotti_frontend import main
+        import kotti_frontend
+
+        settings = self.required_settings()
+        settings['kotti.zcml_includes'] = ('kotti:test.zcml')
+        configurator_mock = MagicMock()
+        with patch('kotti_frontend.initialize_sql'):
+            with patch('kotti_frontend.Configurator', return_value=configurator_mock):
+                app = main({}, **settings)
+                configurator_mock.load_zcml.assert_called_once_with('kotti:test.zcml')
