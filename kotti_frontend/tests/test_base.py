@@ -22,3 +22,23 @@ class TestApp:
                     main({}, **required_settings)
                     assert engine_from_config.called
                     assert initialize_sql.called
+
+    def test_override_settings(self, db_session):
+        from kotti_frontend import main
+        from kotti import get_settings
+        from mock import patch
+
+        class MyType(object):
+            pass
+
+        def my_configurator(conf):
+            conf['kotti.base_includes'] = ''
+            conf['kotti.available_types'] = [MyType]
+
+        settings = self.required_settings()
+        settings['kotti.configurators'] = [my_configurator]
+        with patch('kotti.resources.initialize_sql'):
+            main({}, **settings)
+
+        assert get_settings()['kotti.base_includes'] == []
+        assert get_settings()['kotti.available_types'] == [MyType]
