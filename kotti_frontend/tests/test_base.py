@@ -42,3 +42,25 @@ class TestApp:
 
         assert get_settings()['kotti.base_includes'] == []
         assert get_settings()['kotti.available_types'] == [MyType]
+
+    def test_pyramid_includes_overrides_base_includes(self, root):
+        from mock import patch
+        from kotti_frontend import main
+        from pyramid.interfaces import IView
+        from pyramid.interfaces import IViewClassifier
+        from pyramid.request import Request
+        from zope.interface import implementedBy
+        from zope.interface import providedBy
+
+        settings = self.required_settings()
+        settings['pyramid.includes'] = ('kotti.testing.includeme_login')
+        with patch('kotti.resources.initialize_sql'):
+            app = main({}, **settings)
+
+        provides = [
+            IViewClassifier,
+            implementedBy(Request),
+            providedBy(root),
+            ]
+        view = app.registry.adapters.lookup(provides, IView, name='login')
+        assert view.__module__ == 'kotti.testing'
