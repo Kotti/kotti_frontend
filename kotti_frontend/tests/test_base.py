@@ -37,7 +37,7 @@ class TestApp:
 
         settings = self.required_settings()
         settings['kotti.configurators'] = [my_configurator]
-        with patch('kotti.resources.initialize_sql'):
+        with patch('kotti_frontend.initialize_sql'):
             main({}, **settings)
 
         assert get_settings()['kotti.base_includes'] == []
@@ -54,7 +54,7 @@ class TestApp:
 
         settings = self.required_settings()
         settings['pyramid.includes'] = ('kotti.testing.includeme_login')
-        with patch('kotti.resources.initialize_sql'):
+        with patch('kotti_frontend.initialize_sql'):
             app = main({}, **settings)
 
         provides = [
