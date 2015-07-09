@@ -26,10 +26,12 @@ to play with other components:
   Pyramid has different REST solutions and this is included in the Kotti roadmap
 
 |build status|_
-.. image:: http://codecov.io/github/Kotti/kotti_frontend/coverage.svg?branch=master :target: http://codecov.io/github/Kotti/kotti_frontend?branch=master
+|code coverage|_
 
 .. |build status| image:: https://secure.travis-ci.org/Kotti/kotti_frontend.png?branch=master
 .. _build status: http://travis-ci.org/Kotti/kotti_frontend
+.. |code coverage| image:: http://codecov.io/github/Kotti/kotti_frontend/coverage.svg?branch=master
+.. _code coverage: http://codecov.io/github/Kotti/kotti_frontend?branch=master
 
 Kotti itself is a very good, manageable and light CMS and web framework, but if
 you adopt a separation among frontend and backend your work will be even more agile.
