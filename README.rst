@@ -26,6 +26,7 @@ to play with other components:
   Pyramid has different REST solutions and this is included in the Kotti roadmap
 
 |build status|_
+.. image:: http://codecov.io/github/Kotti/kotti_frontend/coverage.svg?branch=master :target: http://codecov.io/github/Kotti/kotti_frontend?branch=master
 
 .. |build status| image:: https://secure.travis-ci.org/Kotti/kotti_frontend.png?branch=master
 .. _build status: http://travis-ci.org/Kotti/kotti_frontend
