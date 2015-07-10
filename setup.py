@@ -15,7 +15,7 @@ requires = [
     ]
 
 setup(name='kotti_frontend',
-      version='0.0',
+      version='0.0.1.dev0',
       description='kotti_frontend',
       long_description=README + '\n\n' + CHANGES,
       classifiers=[

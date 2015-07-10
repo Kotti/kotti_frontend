@@ -1,4 +1,7 @@
-0.0
----
+History
+=======
+
+0.0.1 (unreleased)
+------------------
 
 -  Initial version
