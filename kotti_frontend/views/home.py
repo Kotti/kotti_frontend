@@ -6,7 +6,7 @@ from kotti.resources import Document
 
 @view_config(context=Document,
              root_only=True,
-             renderer='kotti_frontend:templates/mytemplate.pt')
+             renderer='kotti_frontend:templates/{0}/index.html')
 def home_view(request):
     # you can register a different home page view
     return {}
