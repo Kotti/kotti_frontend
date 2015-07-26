@@ -1,3 +1,4 @@
+// https://www.npmjs.com/package/gulp-minify-html
 // generated on 2015-07-26 using generator-gulp-webapp 1.0.3
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
@@ -50,7 +51,16 @@ gulp.task('html', ['styles'], () => {
     .pipe($.if('*.css', $.minifyCss({compatibility: '*'})))
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.if('*.html', $.minifyHtml({conditionals: true, loose: true})))
+    .pipe($.if('*.html', $.htmlMinifier({
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true,
+      removeComments: true,
+      removeCommentsFromCDATA: true,
+      removeEmptyAttributes: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      keepClosingSlash: true,
+    })))
     .pipe(gulp.dest('dist'));
 });
 
