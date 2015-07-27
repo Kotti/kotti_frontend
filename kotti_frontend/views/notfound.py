@@ -2,7 +2,7 @@ from pyramid.view import notfound_view_config
 
 
 @notfound_view_config(
-    renderer='kotti_frontend:templates/notfound.pt',
+    renderer='kotti_frontend:templates/{0}/notfound.html',
     )
 def notfound_view(request):
     request.response.status = '404 Not Found'
