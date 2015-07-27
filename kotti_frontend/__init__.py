@@ -24,6 +24,11 @@ frontend_includes = [
 
 conf_defaults = copy.deepcopy(kotti_conf_defaults)
 conf_defaults['kotti.base_includes'] = ' '.join(frontend_includes)
+conf_defaults['kotti.configurators'] += 'kotti_frontend.kotti_configure'
+
+
+def kotti_configure(settings):
+    settings['kotti.asset_overrides'] += 'kotti_frontend:kotti-overrides/'
 
 
 def main(global_config, **settings):
