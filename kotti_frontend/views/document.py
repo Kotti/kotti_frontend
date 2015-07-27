@@ -3,7 +3,7 @@ from kotti.resources import Document
 
 
 @view_config(context=Document,
-             renderer='kotti_frontend:templates/{0}/index.html',
+             renderer='kotti_frontend:templates/{0}/document.html',
              name='view',
              permission='pview')
 def document_view(request):
