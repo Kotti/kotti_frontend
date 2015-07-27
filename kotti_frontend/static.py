@@ -1,8 +1,6 @@
 from pyramid_html_minifier.config import DEFAULT_PLACEHOLDER
 
 def includeme(config):   # pragma: no cover
-    config.add_static_view('static', 'static', cache_max_age=3600)   # TODO: remove me
-
     settings = config.registry.settings
     placeholder = settings.get('pyramid_html_minifier.placeholder', DEFAULT_PLACEHOLDER)
 
