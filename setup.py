@@ -12,7 +12,7 @@ requires = [
     'Kotti>=1.0.0',
     'Paste',
     'kotti_backend',
-    'pyramid_html_renderer',
+    'pyramid_html_minifier',
     ]
 
 setup(name='kotti_frontend',

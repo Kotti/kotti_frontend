@@ -1,10 +1,10 @@
-from pyramid_html_renderer.config import DEFAULT_PLACEHOLDER
+from pyramid_html_minifier.config import DEFAULT_PLACEHOLDER
 
 def includeme(config):   # pragma: no cover
     config.add_static_view('static', 'static', cache_max_age=3600)   # TODO: remove me
 
     settings = config.registry.settings
-    placeholder = settings.get('pyramid_html_renderer.placeholder', DEFAULT_PLACEHOLDER)
+    placeholder = settings.get('pyramid_html_minifier.placeholder', DEFAULT_PLACEHOLDER)
 
     # styles
     default_styles_path = 'kotti_frontend:templates/{0}/styles/'.format(DEFAULT_PLACEHOLDER) 
