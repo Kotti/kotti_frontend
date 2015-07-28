@@ -33,7 +33,7 @@
                tal:condition="snippets"
                tal:repeat="snippet snippets"
                tal:replace="structure snippet" />
-    <script>
+    <script tal:on-error="nothing">
       kotti_context_url = '${request.resource_url(context)}';
     </script>
   </head>
@@ -43,7 +43,8 @@
                ${api.body_css_class}">
     <nav tal:replace="api.render_template('kotti:templates/view/nav.pt')" />
 
-    <div class="container">
+    <div class="container" metal:define-slot="container">
+      <metal:define-slot define-slot="container">
       <div tal:replace="api.render_template('kotti:templates/edit/breadcrumbs.pt')" />
 
       <div class="row">
