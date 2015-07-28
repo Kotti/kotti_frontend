@@ -8,6 +8,16 @@ import {stream as wiredep} from 'wiredep';
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
+const htmlMinifierOptions = {
+  collapseBooleanAttributes: true,
+  collapseWhitespace: true,
+  removeComments: true,
+  removeCommentsFromCDATA: true,
+  removeEmptyAttributes: true,
+  removeRedundantAttributes: true,
+  useShortDoctype: true,
+  keepClosingSlash: true,
+  }
 
 gulp.task('styles', () => {
   return gulp.src('app/styles/*.scss')
@@ -45,23 +55,22 @@ gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 gulp.task('html', ['styles'], () => {
   const assets = $.useref.assets({searchPath: ['.tmp', 'app', '.']});
 
-  return gulp.src('app/**/*.html')
+  return gulp.src('app/*.html')
     .pipe(assets)
     .pipe($.if('*.js', $.uglify()))
     .pipe($.if('*.css', $.minifyCss({compatibility: '*'})))
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.if('*.html', $.htmlMinifier({
-      collapseBooleanAttributes: true,
-      collapseWhitespace: true,
-      removeComments: true,
-      removeCommentsFromCDATA: true,
-      removeEmptyAttributes: true,
-      removeRedundantAttributes: true,
-      useShortDoctype: true,
-      keepClosingSlash: true,
-    })))
+    .pipe($.if('*.html', $.htmlMinifier(htmlMinifierOptions)))
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('overrides', ['html'], () => {
+  const assets = $.useref.assets({searchPath: ['app']});
+
+  return gulp.src('app/kotti-overrides/**/*.pt')
+    .pipe($.if('*.pt', $.htmlMinifier(htmlMinifierOptions)))
+    .pipe(gulp.dest('dist/kotti-overrides'));
 });
 
 gulp.task('images', () => {
@@ -166,7 +175,7 @@ gulp.task('wiredep', () => {
     .pipe(gulp.dest('app'));
 });
 
-gulp.task('build', ['lint', 'html', 'images', 'fonts', 'extras'], () => {
+gulp.task('build', ['lint', 'html', 'overrides', 'images', 'fonts', 'extras'], () => {
   return gulp.src('dist/**/*').pipe($.size({title: 'build', gzip: true}));
 });
 
