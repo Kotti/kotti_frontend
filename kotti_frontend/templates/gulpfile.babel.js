@@ -62,6 +62,10 @@ gulp.task('html', ['styles'], () => {
     .pipe(assets.restore())
     .pipe($.useref())
     .pipe($.if('*.html', $.htmlMinifier(htmlMinifierOptions)))
+    .pipe($.replace(/<script src="scripts\/([^"]*)"/g,
+      '<script src="${request.static_url(\'kotti_frontend:templates/app/scripts/$1\')}"'))
+    .pipe($.replace(/<link rel="stylesheet" href="styles\/([^"]*)"/g,
+      '<link rel="stylesheet" href="${request.static_url(\'kotti_frontend:templates/app/styles/$1\')}"'))
     .pipe(gulp.dest('dist'));
 });
 
