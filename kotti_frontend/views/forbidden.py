@@ -2,7 +2,7 @@ from pyramid.view import forbidden_view_config
 
 
 @forbidden_view_config(
-    renderer='kotti_frontend:templates/forbidden.pt',
+    renderer='kotti_frontend:templates/{}/forbidden.html',
     )
 def forbidden_view(request):
     request.response.status = '403 Forbidden'
