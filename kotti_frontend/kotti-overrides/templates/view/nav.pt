@@ -20,6 +20,7 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse"
+      tal:on-error="nothing"
       id="navbar-view-collapse">
       <ul class="nav navbar-nav">
         <li tal:define="items [i for i in api.list_children(api.navigation_root, 'pview') if i.in_navigation]"
