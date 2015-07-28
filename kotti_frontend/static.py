@@ -8,7 +8,7 @@ def includeme(config):   # pragma: no cover
     default_styles_path = 'kotti_frontend:templates/{0}/styles/'.format(DEFAULT_PLACEHOLDER)
     config.add_static_view('styles',
                            default_styles_path)
-    if placeholder == DEFAULT_PLACEHOLDER:  # add use_sass option
+    if placeholder == DEFAULT_PLACEHOLDER:
         config.override_asset(to_override=default_styles_path,
                               override_with='kotti_frontend:templates/.tmp/styles/')
     else:
@@ -43,3 +43,11 @@ def includeme(config):   # pragma: no cover
         fonts_path = 'kotti_frontend:templates/{0}/fonts/'.format(placeholder)
         config.override_asset(to_override=default_fonts_path,
                               override_with=fonts_path)
+
+    # kotti_frontend's master template
+    if placeholder != DEFAULT_PLACEHOLDER:
+        base_index = 'kotti_frontend:templates/{0}/index.html'
+        index_default = base_index.format(DEFAULT_PLACEHOLDER)
+        index_override = base_index.format(placeholder)
+        config.override_asset(to_override=index_default,
+                              override_with=index_override)
