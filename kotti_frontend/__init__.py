@@ -9,6 +9,8 @@ from kotti import (
     )
 from kotti.resources import initialize_sql
 
+from pyramid_html_minifier.config import DEFAULT_PLACEHOLDER
+
 frontend_includes = [
     'kotti',
     'kotti.views',   # custom kotti predicates
@@ -28,7 +30,13 @@ conf_defaults['kotti.configurators'] += 'kotti_frontend.kotti_configure'
 
 
 def kotti_configure(settings):
-    settings['kotti.asset_overrides'] += 'kotti_frontend:kotti-overrides/'
+    placeholder = settings.get(
+        'pyramid_html_minifier.placeholder',
+        DEFAULT_PLACEHOLDER
+        )
+    base_asset_overrides = ' kotti_frontend:templates/{0}/kotti-overrides/'
+    asset_overrides = base_asset_overrides.format(placeholder)
+    settings['kotti.asset_overrides'] += asset_overrides
 
 
 def main(global_config, **settings):
