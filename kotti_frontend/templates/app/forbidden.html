@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      i18n:domain="kotti_frontend"
       metal:use-macro="api.macro('kotti_frontend:templates/app/index.html')">
 
   <metal:fill-slot fill-slot="content">
-    Forbidden
+    <p i18n:translate="unauthorized">Unauthorized</p>
   </metal:fill-slot>
 </html>

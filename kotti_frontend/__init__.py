@@ -9,11 +9,16 @@ from kotti import (
     )
 from kotti.resources import initialize_sql
 
+from pyramid.i18n import TranslationStringFactory
+
+_ = TranslationStringFactory('kotti_frontend')
+
 from pyramid_html_minifier.config import DEFAULT_PLACEHOLDER
 
 frontend_includes = [
     'kotti',
     'kotti.views',   # custom kotti predicates
+    'kotti_frontend',
     'kotti_frontend.static',
     'kotti_frontend.views.default',
     'kotti_frontend.views.image',
@@ -52,6 +57,11 @@ def main(global_config, **settings):
         initialize_sql(engine)
 
     return config.make_wsgi_app()
+
+
+def includeme(config):
+    # translations
+    config.add_translation_dirs('kotti_frontend:locale')
 
 
 def base_configure(global_config, **settings):
