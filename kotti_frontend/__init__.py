@@ -17,6 +17,7 @@ from pyramid_html_minifier.config import DEFAULT_PLACEHOLDER
 
 frontend_includes = [
     'kotti',
+    'pyramid_html_minifier',
     'kotti.views',   # custom kotti predicates
     'kotti_frontend',
     'kotti_frontend.static',
