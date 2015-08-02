@@ -6,114 +6,125 @@ import os
 
 
 class NpmCommand(Command):
-    """ Run bower commands """
+    """ Run npm install command """
 
-    description = 'run npm commands'
+    description = 'run npm install command'
     user_options = [
-        ('command=', 'c', 'command path'),
-        ('path=', 'p', 'path'),
-        ('options=', 'o', 'options'),
+        ('executable=', 'e', 'executable path'),
+        ('instance-dir=', 'i', 'instance dir of the project'),
     ]
 
     def initialize_options(self):
-      self.command = 'npm'
-      self.options = 'install'
-      self.path = pkg_resources.resource_filename(
+      self.executable = 'npm'
+      self.instance_dir = pkg_resources.resource_filename(
           'kotti_frontend',
           'templates'
           )
   
     def finalize_options(self):
-      command = distutils.spawn.find_executable(self.command)
+      command = distutils.spawn.find_executable(self.executable)
       if not command:
           raise DistutilsArgError(
-              "npm not found. You must specify --command or -c"
-              " with the npm path"
+              "npm not found. You must specify --executable or -e"
+              " with the npm instance_dir"
+              )
+      if not os.path.isdir(self.instance_dir):
+          raise DistutilsArgError(
+              "project dir not found. You must specify --instance_dir or -p"
+              " with the project instance_dir"
               )
   
     def run(self):
-      command = self.command
-      if self.options:
-        command = '{0} {1} {2}'.format(command, self.options, self.path)
+      command = '{0} install --prefix {1} {1}'.format(
+          self.executable,
+          self.instance_dir,
+          )
       self.announce(
-          'Running command: %s' % str(command),
+          'Running command: {0}'.format(command),
           level=distutils.log.INFO)
-      self.spawn((self.command, self.options, self.path))
+      self.spawn(command.split(' '))
 
 
 class BowerCommand(Command):
-    """ Run bower commands """
+    """ Run bower install command """
 
-    description = 'run bower commands'
+    description = 'run bower install command'
     user_options = [
-        ('command=', 'c', 'command path'),
-        ('path=', 'p', 'path'),
-        ('options=', 'o', 'options'),
+        ('executable=', 'e', 'executable path'),
+        ('instance-dir=', 'i', 'instance dir of the project'),
+        ('production=', 'p', 'production mode'),
     ]
 
     def initialize_options(self):
-      self.command = 'bower'
-      self.options = 'install'
-      self.path = pkg_resources.resource_filename(
+      self.executable = 'bower'
+      self.production = False
+      self.instance_dir = pkg_resources.resource_filename(
           'kotti_frontend',
           'templates'
           )
   
     def finalize_options(self):
-      command = distutils.spawn.find_executable(self.command)
-      if not command:
+      executable = distutils.spawn.find_executable(self.executable)
+      if not executable:
           raise DistutilsArgError(
-              "bower not found. You must specify --command or -c"
+              "bower not found. You must specify --executable or -e"
               " with the bower path"
               )
   
     def run(self):
-      command = self.command
-      if self.options:
-        command = '{0} {1} {2}'.format(command, self.options, self.path)
+      command = '{0} install {1}'.format(self.executable, self.instance_dir)
+      if self.production:
+        command = '{0} -p'.format(command)
       self.announce(
-          'Running command: %s' % str(command),
+          'Running command: {0}'.format(command),
           level=distutils.log.INFO)
-      self.spawn((self.command, self.options, self.path))
+      self.spawn(command.split(' '))
 
 
 class GulpCommand(Command):
-    """ Run gulp commands """
+    """ Run gulp build command """
 
-    description = 'run gulp commands'
+    description = 'run gulp build command'
     user_options = [
-        ('command=', 'c', 'command path'),
-        ('path=', 'p', 'path'),
-        ('options=', 'o', 'options'),
+        ('executable=', 'e', 'executable path'),
+        ('instance-dir=', 'i', 'instance dir of the project'),
+        ('gulpfile=', 'g', 'name of the gulpfile'),
     ]
 
     def initialize_options(self):
-      self.command = 'gulp'
-      self.path = pkg_resources.resource_filename(
+      self.executable = 'gulp'
+      self.instance_dir = pkg_resources.resource_filename(
           'kotti_frontend',
           'templates'
           )
-      self.options = 'build --base {0} --gulpfile {1}'.format(
-          self.path,
-          os.path.join(
-              self.path,
-              'gulpfile.babel.js'
-              )
-          )
+      self.gulpfile = 'gulpfile.babel.js'
+      self.gulpfile_path = os.path.join(self.instance_dir, self.gulpfile)
   
     def finalize_options(self):
-      command = distutils.spawn.find_executable(self.command)
-      if not command:
+      executable = distutils.spawn.find_executable(self.executable)
+      if not executable:
           raise DistutilsArgError(
-              "gulp not found. You must specify --command or -c"
+              "gulp not found. You must specify --executable or -e"
               " with the gulp path"
+              )
+      if not os.path.isdir(self.instance_dir):
+          raise DistutilsArgError(
+              "project dir not found. You must specify --instance_dir or -p"
+              " with the project instance_dir"
+              )
+      if not os.path.isfile(self.gulpfile_path):
+          raise DistutilsArgError(
+              "gulpfile not found. You must specify --gulpfile or -g"
+              " with the gulpfile name"
               )
   
     def run(self):
-      command = self.command
-      if self.options:
-        command = '{0} {1}'.format(command, self.options)
+      command = '{0} build --base {1} --gulpfile {2}'.format(
+          self.executable,
+          self.instance_dir,
+          self.gulpfile_path,
+          )
       self.announce(
-          'Running command: %s' % str(command),
+          'Running command: {0}'.format(command),
           level=distutils.log.INFO)
-      self.spawn([self.command] + self.options.split(' '))
+      self.spawn(command.split(' '))
