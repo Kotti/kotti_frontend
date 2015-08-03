@@ -1,8 +1,9 @@
-# TODO: improve me (first try/hack)
-from setuptools import Command
-import distutils
-import pkg_resources
 import os
+import pkg_resources
+from distutils.errors import DistutilsArgError
+from distutils.spawn import find_executable
+from distutils.log import INFO
+from setuptools import Command
 
 
 class NpmCommand(Command):
@@ -22,16 +23,17 @@ class NpmCommand(Command):
           )
   
     def finalize_options(self):
-      command = distutils.spawn.find_executable(self.executable)
+      command = find_executable(self.executable)
       if not command:
           raise DistutilsArgError(
-              "npm not found. You must specify --executable or -e"
-              " with the npm instance_dir"
+              "{0} not found. You must specify --executable or -e"
+              " with the npm instance_dir".format(self.executable)
               )
       if not os.path.isdir(self.instance_dir):
           raise DistutilsArgError(
-              "project dir not found. You must specify --instance_dir or -p"
-              " with the project instance_dir"
+              "project dir {0} not found."
+              " You must specify --instance_dir or -p"
+              " with the project instance_dir".format(self.instance_dir)
               )
   
     def run(self):
@@ -41,7 +43,7 @@ class NpmCommand(Command):
           )
       self.announce(
           'Running command: {0}'.format(command),
-          level=distutils.log.INFO)
+          level=INFO)
       self.spawn(command.split(' '))
 
 
@@ -64,20 +66,21 @@ class BowerCommand(Command):
           )
   
     def finalize_options(self):
-      executable = distutils.spawn.find_executable(self.executable)
+      executable = find_executable(self.executable)
       if not executable:
           raise DistutilsArgError(
-              "bower not found. You must specify --executable or -e"
-              " with the bower path"
+              "{0} not found. You must specify --executable or -e"
+              " with the bower path".format(self.executable)
               )
   
     def run(self):
-      command = '{0} install {1}'.format(self.executable, self.instance_dir)
+      command = '{0} install {1}'.format(self.executable,
+                                         self.instance_dir)
       if self.production:
         command = '{0} -p'.format(command)
       self.announce(
           'Running command: {0}'.format(command),
-          level=distutils.log.INFO)
+          level=INFO)
       self.spawn(command.split(' '))
 
 
@@ -98,24 +101,27 @@ class GulpCommand(Command):
           'templates'
           )
       self.gulpfile = 'gulpfile.babel.js'
-      self.gulpfile_path = os.path.join(self.instance_dir, self.gulpfile)
+      self.gulpfile_path = os.path.join(self.instance_dir,
+                                        self.gulpfile)
   
     def finalize_options(self):
-      executable = distutils.spawn.find_executable(self.executable)
+      executable = find_executable(self.executable)
       if not executable:
           raise DistutilsArgError(
-              "gulp not found. You must specify --executable or -e"
-              " with the gulp path"
+              "{0} not found. You must specify --executable or -e"
+              " with the gulp path".format(self.executable)
               )
       if not os.path.isdir(self.instance_dir):
           raise DistutilsArgError(
-              "project dir not found. You must specify --instance_dir or -p"
-              " with the project instance_dir"
+              "project dir {0} not found."
+              " You must specify --instance_dir or -p"
+              " with the project instance_dir".format(self.instance_dir)
               )
       if not os.path.isfile(self.gulpfile_path):
           raise DistutilsArgError(
-              "gulpfile not found. You must specify --gulpfile or -g"
-              " with the gulpfile name"
+              "gulpfile {0} not found."
+              " You must specify --gulpfile or -g"
+              " with the gulpfile name".format(self.gulpfile_path)
               )
   
     def run(self):
@@ -126,5 +132,5 @@ class GulpCommand(Command):
           )
       self.announce(
           'Running command: {0}'.format(command),
-          level=distutils.log.INFO)
+          level=INFO)
       self.spawn(command.split(' '))
