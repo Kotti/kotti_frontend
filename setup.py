@@ -13,6 +13,7 @@ requires = [
     'Paste',
     'kotti_backend',
     'pyramid_html_minifier',
+    'build_commands',
     ]
 
 setup(name='kotti_frontend',
@@ -43,8 +44,8 @@ setup(name='kotti_frontend',
       [paste.app_factory]
       main = kotti_frontend:main
       [distutils.commands]
-      npm = kotti_frontend.setuptools_commands:NpmCommand
-      bower = kotti_frontend.setuptools_commands:BowerCommand
-      gulp = kotti_frontend.setuptools_commands:GulpCommand
+      npm = build_commands:NpmCommand
+      bower = build_commands:BowerCommand
+      gulp = build_commands:GulpCommand
       """,
       )
