@@ -1,3 +1,4 @@
 {
-  "directory": "kotti_frontend/templates/bower_components"
+  "directory": "bower_components",
+  "cwd": "./kotti_frontend/templates/"
 }
