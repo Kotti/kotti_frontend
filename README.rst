@@ -9,16 +9,15 @@ So ``kotti_frontend`` is not meant to be used as a standalone
 package. Instead you are supposed to include kotti_frontend
 as your dependency and do whatever you want, for example:
 
-* CMS public website area
+* CMS public website area with your opinionated frontend toolchain
 
 * heavy Javascript based web applications (SPA)
 
 * minimal web applications with a private content administration
   area
 
-
-
-It is not meant to be installed like othera standalone product 
+Changeme (WIP)
+--------------
 
 This is the ``kotti_frontend`` motto::
 
