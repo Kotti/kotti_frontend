@@ -12,14 +12,6 @@ from kotti.resources import initialize_sql
 frontend_includes = [
     'kotti',
     'kotti.views',   # custom kotti predicates
-    'kotti_frontend.static',
-    'kotti_frontend.views.default',
-    'kotti_frontend.views.image',
-    'kotti_frontend.views.file',
-    'kotti_frontend.views.home',
-    'kotti_frontend.views.document',
-    'kotti_frontend.views.notfound',
-    'kotti_frontend.views.forbidden',
     ]
 
 conf_defaults = copy.deepcopy(kotti_conf_defaults)

@@ -13,11 +13,9 @@ class TestForbidden:
         doc = self.make_document(root)
         assert doc.state == 'private'
 
-        resp = webtest.get('/doc', headers={'Accept': '*/json'}, status=403)
+        resp = webtest.get('/doc', headers={'Accept': '*/json'}, status=404)
         # the document is private
-        assert resp.status_code == 403
-        assert 'kotti_frontend' in resp.body
-        assert 'MyDocument' not in resp.body
+        assert resp.status_code == 404
 
         # the document is public
         from kotti.workflow import get_workflow
@@ -25,7 +23,5 @@ class TestForbidden:
         wf.transition_to_state(doc, None, u'public')
         assert doc.state == u'public'
 
-        resp = webtest.get('/doc', headers={'Accept': '*/json'}, status=200)
-        assert resp.status_code == 200
-        assert 'kotti_frontend' in resp.body
-        assert 'MyDocument' in resp.body
+        resp = webtest.get('/doc', headers={'Accept': '*/json'}, status=404)
+        assert resp.status_code == 404

@@ -11,4 +11,5 @@ def custom_settings():
         'kotti.site_title': 'kotti_frontend',
         'kotti.use_workflow': 'kotti_frontend:workflows/simple_frontend.zcml',
         'pyramid.includes': ' '.join(frontend_includes),
+        'kotti.base_includes': ' '.join(('kotti', 'kotti.views',))
         }
