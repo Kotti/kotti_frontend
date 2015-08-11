@@ -13,9 +13,29 @@ kotti_frontend
 if you need to build a ``Kotti`` application with a **decoupled**
 private content administration area.
 
-So ``kotti_frontend`` is not meant to be used as a standalone
+``kotti_frontend`` is not meant to be used as a standalone
 package. Instead you are supposed to include ``kotti_frontend``
-as your dependency and do whatever you want, for example:
+as your dependency and do whatever you want.
+
+If you install ``kotti_frontend`` as a standalone package and you run
+``pserve development.ini`` you'll obtain:
+
+* http://localhost:5000/cms. The private content administration area
+
+* http://localhost:5000/. Nothing (not found page).
+  Yes, it is correct because you are supposed to register the views
+  you need for your application
+
+With ``kotti_frontend`` you don't waste time removing or hiding
+features or views not needed by your project and no CSS/Javascript conflicts
+because you are supposed to implement or include what your you need.
+
+The separation among frontend and backend (private content management area)
+let you build applications with the maximum flexibility and without
+being influenced by how the backend is built because they are two
+separate applications.
+
+For example you can use ``kotti_frontend`` as a good starting point for:
 
 * CMS public website area with your opinionated frontend toolchain
 
@@ -23,11 +43,3 @@ as your dependency and do whatever you want, for example:
 
 * minimal web applications with a private content administration
   area
-
-So if you install ``kotti_frontend`` as a standalone package and you run
-``pserve development.ini`` you'll obtain:
-
-* http://localhost:5000/cms, the private content administration area
-
-* http://localnost:5000/, not found page (yes, it is correct).
-  You are supposed to register the views you need for your application
