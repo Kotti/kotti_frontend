@@ -1,2 +1,5 @@
 include *.txt *.ini *.cfg *.rst
 recursive-include kotti_frontend *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml
+include .coveragerc
+recursive-include kotti_frontend *.py
+recursive-include kotti_frontend *.zcml
