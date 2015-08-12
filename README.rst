@@ -1,3 +1,5 @@
+**[IMPORTANT]** There is no need to a blank sheet solution because you can easily switch off all the things you don't need using the ``kotti.base_configure`` option. So kotti_frontend doesn't make sense anymore. The public frontend CMS implementation decoupled from the kotti backend development continues here https://github.com/substancek/substancek_cms_theme
+
 kotti_frontend
 ==============
 
